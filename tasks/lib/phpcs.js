@@ -25,7 +25,8 @@ exports.init = function(grunt) {
             verbose: false,
             reportFile: false,
             report: 'full',
-            maxBuffer: 200*1024
+            maxBuffer: 200*1024,
+            ignoreExitCode: false
         },
         cmd    = null,
         done   = null,
@@ -115,7 +116,9 @@ exports.init = function(grunt) {
             }
 
             if (err) {
-                grunt.fatal(err);
+                if (! config.ignoreExitCode) {
+                    grunt.fatal(err);
+                }
             }
             done();
         });
